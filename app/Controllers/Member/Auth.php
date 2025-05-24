@@ -23,9 +23,11 @@ class Auth extends BaseController
     public function googleLogin()
     {
         $client = new GoogleClient();
-$client->setClientId(getenv('GOOGLE_CLIENT_ID'));
-$client->setClientSecret(getenv('GOOGLE_CLIENT_SECRET'));
-$client->setRedirectUri(getenv('GOOGLE_REDIRECT_URI'));
+$config = config('App');
+$client->setClientId($config->googleClientId);
+$client->setClientSecret($config->googleClientSecret);
+$client->setRedirectUri($config->googleRedirectUri);
+
 
         $client->addScope('email');
         $client->addScope('profile');
@@ -39,11 +41,10 @@ $client->setRedirectUri(getenv('GOOGLE_REDIRECT_URI'));
     {
         try {
             $client = new GoogleClient();
-$client->setClientId(getenv('GOOGLE_CLIENT_ID'));
-$client->setClientSecret(getenv('GOOGLE_CLIENT_SECRET'));
-$client->setRedirectUri(getenv('GOOGLE_REDIRECT_URI'));
-
-
+$config = config('App');
+$client->setClientId($config->googleClientId);
+$client->setClientSecret($config->googleClientSecret);
+$client->setRedirectUri($config->googleRedirectUri);
 
             if (!$this->request->getGet('code')) {
                 return redirect()->to('/auth/google-login');

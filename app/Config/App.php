@@ -199,4 +199,21 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+
+ public $googleClientId;
+    public $googleClientSecret;
+    public $googleRedirectUri;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->googleClientId = getenv('GOOGLE_CLIENT_ID');
+        $this->googleClientSecret = getenv('GOOGLE_CLIENT_SECRET');
+        $this->googleRedirectUri = getenv('GOOGLE_REDIRECT_URI');
+    }
+
+    
+
 }
